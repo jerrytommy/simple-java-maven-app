@@ -1,24 +1,11 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
-  agent {
-    docker {
-      image 'maven:3-alpine'
-      args '-v /root/.m2:/root/.m2'
-    }
-
-  }
-  stages {
-    stage('error') {
-      agent {
-        docker {
-          image 'maven:3-alpine'
-          args '-v /root/.m2:/root/.m2'
+    agent { docker 'maven:3.3.3' }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+            }
         }
-
-      }
-      steps {
-        build 'build'
-      }
     }
-
-  }
 }
